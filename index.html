@@ -8,7 +8,8 @@
 		*{margin:0;padding:0;list-style: none;-webkit-box-sizing: border-box;box-sizing: border-box;}
 		html,body,.canvasbox{width:100%;height:100%;overflow:hidden;position: absolute;top:0;
 			left:0;z-index: 9;}
-		.loveCanvas{width:100%;height:100%;position: absolute;top:0;left:0;background:url('images/mess.png') no-repeat center center / 120% auto;background-color:#000;}
+		/* .loveCanvas{width:100%;height:100%;position: absolute;top:0;left:0;background:url('images/mess.png') no-repeat center center / 120% auto;background-color:#000;} */
+		.loveCanvas{width:100%;height:100%;position: absolute;top:0;left:0;background-color:#000;}
 		canvas{width:100%;height:100%;}
 		#loading{width:100%;height:100%;background:#000;z-index: 9999;position:absolute;}
 		#music{width:0;height:0;position:absolute;top:-9999px;left:-9999px;opacity: 0;display: none;}
@@ -21,23 +22,23 @@
 			right:40px;bottom:30px;margin:auto;text-align:right;font-size:24px;color:#fff;}
 	</style>
 	<script>
-		// document.addEventListener('DOMContentLoaded', function () {
-	 //        function audioAutoPlay() {
-	 //            var video = document.querySelector("#music_01");
-	 //            var video1 = document.querySelector("#music_02");
-	 //            video.play();
-	 //            video1.play();
-	 //            video.pause();
-	 //            video1.pause();
-	 //            document.addEventListener("WeixinJSBridgeReady", function () {
-	 //                video.play();
-	 //                video1.play();
-	 //                video.pause();
-	 //                video1.pause();
-	 //            }, false);
-	 //        }
-	 //        audioAutoPlay(); 
-		// });
+		document.addEventListener('DOMContentLoaded', function () {
+	        function audioAutoPlay() {
+	            var video = document.querySelector("#music_01");
+	            // var video1 = document.querySelector("#music_02");
+	            video.play();
+	            // video1.play();
+	            video.pause();
+	            // video1.pause();
+	            document.addEventListener("WeixinJSBridgeReady", function () {
+	                video.play();
+	                // video1.play();
+	                video.pause();
+	                // video1.pause();
+	            }, false);
+	        }
+	        audioAutoPlay(); 
+		});
 	</script>
 </head>
 <body>
@@ -51,18 +52,18 @@
 		<div class="start">~随便点击一下屏幕^_^</div>
 	</div>
 	<div id="music">
-		<!-- <audio src="music/music_04.mp3" loop="true" id="music_01"></audio>
-		<audio src="music/music_05.mp3" loop="true" id="music_02"></audio>
+		<audio src="music/music_04.mp3" loop="true" id="music_01"></audio>
+		<!-- <audio src="music/music_05.mp3" loop="true" id="music_02"></audio>
 		<audio src="music/music_03.mp3" loop="true" id="music_03"></audio>
 		<audio src="music/music_02.mp3" loop="true" id="music_04"></audio>
 		<audio src="music/music_01.mp3" loop="true" id="music_05"></audio> -->
 	</div>
 	<div class="loveCanvas"></div>
-	<!-- <div class="number"></div> -->
+	<div class="number"></div>
 	<script src="https://cdn.bootcss.com/jquery/3.3.0/jquery.min.js"></script>
 	<script src="js/hilo-standalone.js"></script>
 	<script src="js/Animate.js"></script>
-	<script src="js/Scroller.js"></script>
+	<script src="js/scroller.js"></script>
 	<script>
 		var startfalg = false;
 		window.onload = function(){
@@ -71,7 +72,7 @@
 		$('#loading').click(function(){
 			if(startfalg){
 				$('#loading').hide();
-				// music_01.play();
+				music_01.play();
 				game.addSnow();
 			}
 		})
@@ -82,7 +83,9 @@
 			music_02 = document.getElementById('music_02'),
 			music_03 = document.getElementById('music_03'),
 			music_04 = document.getElementById('music_04'),
-			music_05 = document.getElementById('music_05');
+			music_05 = document.getElementById('music_05'),
+			p_cango = false,
+        	m_cango = false;
 		var musicArr = [
 			{
 				dom: music_01,
@@ -247,6 +250,23 @@
 	            }]
 	        },
 	        {
+	            id: "img_05",
+	            type: "Bitmap",
+	            image: "cake",
+	            delay: "l0",
+	            propes: {
+	            	rect: [0, 0, 500, 506],
+	            	x: (750-500)/2,
+               		y: (_height-506)/2,
+               		alpha: 0,
+	            },
+	            animations: [{
+	                prope: "alpha",
+	                time: [0, 9000, 10000, 2e5],
+	                value: [0, 0.4]
+	            }]
+	        },
+	        {
 	            id: "text_01",
 	            type: "Bitmap",
 	            image: "birthText",
@@ -385,27 +405,27 @@
 	                value: [(_height-39)/2, (_height-39)/2-200]
 	            }]
 	        },
-	        {
-	            id: "text_08",
-	            type: "Bitmap",
-	            image: "birthText",
-	            delay: "l0",
-	            propes: {
-	            	rect: [626, 0, 125, 43],
-	            	x: (750-125)/2,
-               		y: (_height-43)/2,
-               		alpha: 0
-	            },
-	            animations: [{
-	                prope: "alpha",
-	                time: [0, 8000, 8500, 9000, 2e5],
-	                value: [0, 1, 0]
-	            },{
-	                prope: "y",
-	                time: [0, 8000, 9000, 2e5],
-	                value: [(_height-43)/2, (_height-43)/2-200]
-	            }]
-	        }
+	        // {
+	        //     id: "text_08",
+	        //     type: "Bitmap",
+	        //     image: "birthText",
+	        //     delay: "l0",
+	        //     propes: {
+	        //     	rect: [626, 0, 125, 43],
+	        //     	x: (750-125)/2,
+         //       		y: (_height-43)/2,
+         //       		alpha: 0
+	        //     },
+	        //     animations: [{
+	        //         prope: "alpha",
+	        //         time: [0, 8000, 8500, 9000, 2e5],
+	        //         value: [0, 1, 0]
+	        //     },{
+	        //         prope: "y",
+	        //         time: [0, 8000, 9000, 2e5],
+	        //         value: [(_height-43)/2, (_height-43)/2-200]
+	        //     }]
+	        // }
 		];
 		var timer = {
 			l0: 0,
@@ -432,6 +452,7 @@
 	           		{id:'img_03', src: 'images/img_03.jpg'},
 	           		{id:'img_04', src: 'images/img_04.jpg'},
 	           		{id:'birthText', src: 'images/birthText.png'},
+	           		{id:'cake', src: 'images/cake.png'},
 	            ];
 	            this.queue = new Hilo.LoadQueue();
 	            this.queue.add(resource);
@@ -439,6 +460,9 @@
 
 	            this.queue.on('load', function(e){
 				    var nums = Math.floor( (this.getLoaded()/resource.length) *100);
+				    if(nums >= 90){
+				    	nums = 90;
+				    }
 				    $('.pressnum').text(nums+'%');
             		$('.press-press').css({width: nums+'%'})
 				});
@@ -466,10 +490,14 @@
 	 			this.asset = new Asset();
 	            this.asset.on('complete', function(e){
 	               this.asset.off('complete');
-	               $('.pressnum').text('100%');
-            	   $('.press-press').css({width: '100%'});
-            	   $('.start').show();
-            	   startfalg = true;
+	                p_cango = true;
+               		if(m_cango){
+	               	   $('.pressnum').text('100%');
+	            	   $('.press-press').css({width: '100%'});
+	            	   $('.start').show();
+	            	   startfalg = true;
+	               }
+	              
 	               this.initStage();
 	            }.bind(this))
 	            this.asset.load();
@@ -652,7 +680,7 @@
 	            animationDuration: 1e3
 	        })
 
-        	scroller.setDimensions(750, _height, 750, 30000);
+        	scroller.setDimensions(750, _height, 750, 10000+_height);
 
 	        $('.loveCanvas').on('touchstart', function(e){
 	            e.stopPropagation(),
@@ -667,7 +695,16 @@
 	        });
 	    }
 
-
+	    music_01.load();
+	    music_01.addEventListener('canplaythrough', function(){
+	        m_cango = true;
+	        if(p_cango){
+	           $('.pressnum').text('100%');
+        	   $('.press-press').css({width: '100%'});
+        	   $('.start').show();
+        	   startfalg = true;
+	        }
+	    })
 	    // 阻止页面滑动
 		;(function(){
 			function isPassive() {
