@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=750, target-densitydpi=device-dpi, user-scalable=0">
+	<title>新的一年</title>
+	<style>
+		*{margin:0;padding:0;list-style: none;-webkit-box-sizing: border-box;box-sizing: border-box;}
+		html,body,.canvasbox{width:100%;height:100%;overflow:hidden;position: absolute;top:0;
+			left:0;z-index: 9;}
+		.loveCanvas{width:100%;height:100%;position: absolute;top:0;left:0;background:url('images/mess.png') no-repeat center center / 120% auto;background-color:#000;}
+		canvas{width:100%;height:100%;}
+		#loading{width:100%;height:100%;background:#000;z-index: 9999;position:absolute;}
+		#music{width:0;height:0;position:absolute;top:-9999px;left:-9999px;opacity: 0;display: none;}
+		.number{width:100px;height:30px;color:#fff;position:absolute;left:0;top:0;z-index: 9999;font-size:28px;}
+		.press{width:400px;height:100px;position: absolute;top:0;left:0;right:0;bottom:0;margin:auto;transform:translateY(-80px);-webkit-transform:translateY(-80px);}
+		.pressnum{display:block;font-size:24px;color:#fff;text-align:center;line-height:50px;}
+		.press-box{width:100%;padding:3px;height:10px;background:#fff;margin-top:20px;border-radius:10px;}
+		.press-press{display:block;width:0;height:100%;background:#000;border-radius:6px;}
+		.start{display:none;width:300px;height:50px;position: absolute;
+			right:40px;bottom:30px;margin:auto;text-align:right;font-size:24px;color:#fff;}
+	</style>
+	<script>
+		// document.addEventListener('DOMContentLoaded', function () {
+	 //        function audioAutoPlay() {
+	 //            var video = document.querySelector("#music_01");
+	 //            var video1 = document.querySelector("#music_02");
+	 //            video.play();
+	 //            video1.play();
+	 //            video.pause();
+	 //            video1.pause();
+	 //            document.addEventListener("WeixinJSBridgeReady", function () {
+	 //                video.play();
+	 //                video1.play();
+	 //                video.pause();
+	 //                video1.pause();
+	 //            }, false);
+	 //        }
+	 //        audioAutoPlay(); 
+		// });
+	</script>
+</head>
+<body>
+	<div id="loading">
+		<div class="press">
+			<span class="pressnum">0%</span>
+			<div class="press-box">
+				<span class="press-press"></span>
+			</div>
+		</div>
+		<div class="start">~随便点击一下屏幕^_^</div>
+	</div>
+	<div id="music">
+		<audio src="music/music_04.mp3" loop="true" id="music_01"></audio>
+		<audio src="music/music_05.mp3" loop="true" id="music_02"></audio>
+		<audio src="music/music_03.mp3" loop="true" id="music_03"></audio>
+		<audio src="music/music_02.mp3" loop="true" id="music_04"></audio>
+		<audio src="music/music_01.mp3" loop="true" id="music_05"></audio>
+	</div>
+	<div class="loveCanvas"></div>
+	<div class="number"></div>
+	<script src="https://cdn.bootcss.com/jquery/3.3.0/jquery.min.js"></script>
+	<script src="js/hilo-standalone.js"></script>
+	<script src="js/Animate.js"></script>
+	<script src="js/scroller.js"></script>
+	<script>
+		var startfalg = false;
+		window.onload = function(){
+			game.init();
+		}
+		$('#loading').click(function(){
+			if(startfalg){
+				$('#loading').hide();
+				// music_01.play();
+				game.addSnow();
+			}
+		})
+		var _width = 750,
+			_height = window.innerHeight,
+			canvas = document.getElementsByClassName('loveCanvas')[0],
+			music_01 = document.getElementById('music_01'),
+			music_02 = document.getElementById('music_02'),
+			music_03 = document.getElementById('music_03'),
+			music_04 = document.getElementById('music_04'),
+			music_05 = document.getElementById('music_05');
+		var musicArr = [
+			{
+				dom: music_01,
+				timer: [0,5000]
+			},
+			{
+				dom: music_02,
+				timer: [5000, 10000]
+			},
+			{
+				dom: music_03,
+				timer: [10000, 15000]
+			},
+			{
+				dom: music_04,
+				timer: [15000, 20000]
+			},
+			{
+				dom: music_05,
+				timer: [20000, 25000]
+			},
+		];
+		var stageList = [
+			{
+				id:"lines",
+				type: "Container",
+	            propes: {
+	                width: 20,
+	                height: 220,
+	                x: (750-20)/2,
+	                y: _height-220-100,
+	                pivotX: 0,
+	                pivotY: 0
+	            },
+	            delay: "l0",
+	            animations: [{
+	                prope: "y",
+	                time: [0, 0, 780, 2e5],
+	                value: [_height-220-100, _height-220-200]
+	            },{
+	                prope: "alpha",
+	                time: [0, 0, 780, 2e5],
+	                value: [1, 0]
+	            }]
+			},
+			{
+	            id: "lines_bg",
+	            type: "Bitmap",
+	            image: "lines",
+	            parent: "lines",
+	            propes: {
+	            	rect: [2, 0, 1, 220],
+	            	x: 10,
+               		y: 0
+	            },
+	            animations: []
+	        },
+	        {
+	            id: "lines_cir",
+	            type: "Bitmap",
+	            image: "lines",
+	            parent: "lines",
+	            propes: {
+	            	rect: [4, 70, 15, 15],
+	            	x: 5,
+               		y: 200
+	            },
+	            animations: []
+	        },
+	        {
+	            id: "img_01",
+	            type: "Bitmap",
+	            image: "img_01",
+	            delay: "l0",
+	            propes: {
+	            	rect: [0, 0, 500, 500],
+	            	x: 250/2,
+               		y: (_height-500)/2,
+               		alpha: 0.9
+	            },
+	            animations: [{
+	                prope: "y",
+	                time: [0, 0, 3000, 2e5],
+	                value: [(_height-500)/2, -500]
+	            },{
+	                prope: "alpha",
+	                time: [0, 0, 3000, 2e5],
+	                value: [0.9, 0]
+	            }]
+	        },
+	        {
+	            id: "img_02",
+	            type: "Bitmap",
+	            image: "img_02",
+	            delay: "l0",
+	            propes: {
+	            	rect: [0, 0, 500, 667],
+	            	x: 250/2,
+               		y: _height,
+               		alpha: 0.9
+	            },
+	            animations: [{
+	                prope: "y",
+	                time: [0, 2000, 5000, 2e5],
+	                value: [_height, -667]
+	            },{
+	                prope: "alpha",
+	                time: [0, 2000, 3500, 5000, 2e5],
+	                value: [0, 0.9, 0]
+	            }]
+	        },
+	        {
+	            id: "img_03",
+	            type: "Bitmap",
+	            image: "img_03",
+	            delay: "l0",
+	            propes: {
+	            	rect: [0, 0, 500, 667],
+	            	x: 250/2,
+               		y: _height,
+               		alpha: 0.9
+	            },
+	            animations: [{
+	                prope: "y",
+	                time: [0, 4000, 7000, 2e5],
+	                value: [_height, -667]
+	            },{
+	                prope: "alpha",
+	                time: [0, 4000, 5500, 7000, 2e5],
+	                value: [0, 0.9, 0]
+	            }]
+	        },
+	        {
+	            id: "img_04",
+	            type: "Bitmap",
+	            image: "img_04",
+	            delay: "l0",
+	            propes: {
+	            	rect: [0, 0, 500, 667],
+	            	x: 250/2+250,
+               		y: _height+667/2,
+               		alpha: 0.9,
+               		pivotX: 250,
+	                pivotY: 667/2
+	            },
+	            animations: [{ 
+	                prope: "y",
+	                time: [0, 6100, 7500, 2e5],
+	                value: [_height+667/2, (_height-667)/2+667/2]
+	            },{
+	                prope: "alpha",
+	                time: [0, 6100, 7500, 9000, 2e5],
+	                value: [0, 0.9, 0]
+	            },{
+	                prope: "scaleX",
+	                time: [0, 7500, 9000],
+	                value: [1, 10]
+	            },{
+	                prope: "scaleY",
+	                time: [0, 7500, 9000],
+	                value: [1, 10]
+	            }]
+	        },
+	        {
+	            id: "text_01",
+	            type: "Bitmap",
+	            image: "birthText",
+	            delay: "l0",
+	            propes: {
+	            	rect: [0, 0, 165, 43],
+	            	x: (750-165)/2,
+               		y: (_height-500)/2-43*2,
+               		alpha: 1
+	            },
+	            animations: [{
+	                prope: "alpha",
+	                time: [0, 0, 200, 2e5],
+	                value: [1, 0]
+	            }]
+	        },
+	        {
+	            id: "text_02",
+	            type: "Bitmap",
+	            image: "birthText",
+	            delay: "l0",
+	            propes: {
+	            	rect: [0, 43, 165, 81],
+	            	x: (750-165)/2,
+               		y: (_height-43)/2,
+               		alpha: 0
+	            },
+	            animations: [{
+	                prope: "alpha",
+	                time: [0, 1000, 1500, 2000, 2e5],
+	                value: [0, 1, 0]
+	            },{
+	                prope: "y",
+	                time: [0, 1500, 2000, 2e5],
+	                value: [(_height-43)/2, (_height-43)/2-200]
+	            }]
+	        },
+	        {
+	            id: "text_03",
+	            type: "Bitmap",
+	            image: "birthText",
+	            delay: "l0",
+	            propes: {
+	            	rect: [165, 0, 296, 43],
+	            	x: (750-296)/2,
+               		y: (_height-43)/2,
+               		alpha: 0
+	            },
+	            animations: [{
+	                prope: "alpha",
+	                time: [0, 2000, 2500, 3000, 2e5],
+	                value: [0, 1, 0]
+	            },{
+	                prope: "y",
+	                time: [0, 2500, 3000, 2e5],
+	                value: [(_height-43)/2, (_height-43)/2-200]
+	            }]
+	        },
+	        {
+	            id: "text_04",
+	            type: "Bitmap",
+	            image: "birthText",
+	            delay: "l0",
+	            propes: {
+	            	rect: [165, 43, 211, 39],
+	            	x: (750-211)/2,
+               		y: (_height-39)/2,
+               		alpha: 0
+	            },
+	            animations: [{
+	                prope: "alpha",
+	                time: [0, 4000, 4500, 5000, 2e5],
+	                value: [0, 1, 0]
+	            }]
+	        },
+	        {
+	            id: "text_05",
+	            type: "Bitmap",
+	            image: "birthText",
+	            delay: "l0",
+	            propes: {
+	            	rect: [460, 0, 167, 43],
+	            	x: (750-167)/2,
+               		y: (_height-43)/2,
+               		alpha: 0
+	            },
+	            animations: [{
+	                prope: "alpha",
+	                time: [0, 6100, 6400, 6700, 2e5],
+	                value: [0, 1, 0]
+	            },{
+	                prope: "y",
+	                time: [0, 6100, 6700, 2e5],
+	                value: [(_height-43)/2, (_height-43)/2-200]
+	            }]
+	        },
+	        {
+	            id: "text_06",
+	            type: "Bitmap",
+	            image: "birthText",
+	            delay: "l0",
+	            propes: {
+	            	rect: [375, 43, 169, 39],
+	            	x: (750-169)/2,
+               		y: (_height-39)/2,
+               		alpha: 0
+	            },
+	            animations: [{
+	                prope: "alpha",
+	                time: [0, 6400, 6700, 7000, 2e5],
+	                value: [0, 1, 0]
+	            },{
+	                prope: "y",
+	                time: [0, 6400, 7000, 2e5],
+	                value: [(_height-39)/2, (_height-39)/2-200]
+	            }]
+	        },
+	        {
+	            id: "text_07",
+	            type: "Bitmap",
+	            image: "birthText",
+	            delay: "l0",
+	            propes: {
+	            	rect: [544, 43, 166, 39],
+	            	x: (750-166)/2,
+               		y: (_height-39)/2,
+               		alpha: 0
+	            },
+	            animations: [{
+	                prope: "alpha",
+	                time: [0, 6700, 7000, 7300, 2e5],
+	                value: [0, 1, 0]
+	            },{
+	                prope: "y",
+	                time: [0, 6700, 7300, 2e5],
+	                value: [(_height-39)/2, (_height-39)/2-200]
+	            }]
+	        },
+	        {
+	            id: "text_08",
+	            type: "Bitmap",
+	            image: "birthText",
+	            delay: "l0",
+	            propes: {
+	            	rect: [626, 0, 125, 43],
+	            	x: (750-125)/2,
+               		y: (_height-43)/2,
+               		alpha: 0
+	            },
+	            animations: [{
+	                prope: "alpha",
+	                time: [0, 8000, 8500, 9000, 2e5],
+	                value: [0, 1, 0]
+	            },{
+	                prope: "y",
+	                time: [0, 8000, 9000, 2e5],
+	                value: [(_height-43)/2, (_height-43)/2-200]
+	            }]
+	        }
+		];
+		var timer = {
+			l0: 0,
+			l1: 10000,
+			l2: 20000,
+			l3: 30000,
+			l4: 40000,
+			l5: 50000,
+			l6: 60000
+		}
+		/* 预加载部分 */
+	    var Asset = Hilo.Class.create({
+	        Mixes: Hilo.EventMixin,
+	        queue: null,
+	        load: function(){
+	            var resource = [
+	           		// {id:'music_01', src: 'music/music_01.mp3'},
+	           		// {id:'music_02', src: 'music/music_02.mp3'},
+	           		{id:'snow', src: 'images/snow.png'},
+	           		{id:'lines', src: 'images/lines.png'},
+	           		{id:'heart', src: 'images/heart.png'},
+	           		{id:'img_01', src: 'images/img_01.jpg'},
+	           		{id:'img_02', src: 'images/img_02.jpg'},
+	           		{id:'img_03', src: 'images/img_03.jpg'},
+	           		{id:'img_04', src: 'images/img_04.jpg'},
+	           		{id:'birthText', src: 'images/birthText.png'},
+	            ];
+	            this.queue = new Hilo.LoadQueue();
+	            this.queue.add(resource);
+	            this.queue.on('complete', this.onComplete.bind(this));
+
+	            this.queue.on('load', function(e){
+				    var nums = Math.floor( (this.getLoaded()/resource.length) *100);
+				    $('.pressnum').text(nums+'%');
+            		$('.press-press').css({width: nums+'%'})
+				});
+				// this.queue.on('error', function(e){
+				//     console.log('error:', e.detail);
+				// });
+
+	            this.queue.start();
+	        },
+	        onComplete: function(){
+	            console.log('加载完成');
+	            this.queue.off('complete');
+	            this.fire('complete');
+	        }
+	    })
+
+	    var game = {
+	    	asset: null,
+	        stage: null,
+	        ticker: null,
+	        snow: null,
+	        lines: null,
+	        m:{},
+	    	init: function(){
+	 			this.asset = new Asset();
+	            this.asset.on('complete', function(e){
+	               this.asset.off('complete');
+	               $('.pressnum').text('100%');
+            	   $('.press-press').css({width: '100%'});
+            	   $('.start').show();
+            	   startfalg = true;
+	               this.initStage();
+	            }.bind(this))
+	            this.asset.load();
+	    	},
+	    	initStage: function(){
+	    		console.log('舞台初始化');
+	    		this.stage = new Hilo.Stage({                                          
+	                renderType: 'canvas',
+	                container: canvas,
+	                width: 750,
+	                height: _height
+	            })
+	            //启动计时器
+	            this.ticker = new Hilo.Ticker(60);
+	            this.ticker.addTick(Hilo.Tween);
+	            this.ticker.addTick(this.stage);
+	            this.ticker.start(true);
+	           	
+	            for(var i = 0; i < stageList.length; i++){
+	                stageList[i].image?stageList[i].propes.image = this.asset.queue.get(stageList[i].image).content:'';
+	                stageList[i].frames ? stageList[i].propes.frames =game.m[stageList[i].frames.split(".")[0]].getSprite(stageList[i].frames.split(".")[1]) : "";
+	                this.m[stageList[i].id] = new Hilo[stageList[i].type](stageList[i].propes).addTo( (stageList[i].parent)?(game.m[stageList[i].parent]):this.stage);
+	                "Graphics" == stageList[i].type && stageList[i].draw.call(game.m[stageList[i].id])
+	            }
+	            Hilo.Tween.to(this.stage.children[0].children[1], {
+	            	y: 0,
+	                alpha: 0
+	            }, {
+	                duration: 1600,
+	                delay: 0,
+	                loop: !0,
+	                // onComplete: function() {
+	                //     game.whiteBlock.alpha = 0
+	                // }
+	            })
+	            // 粒子系统
+	            var partArr = [];
+	            function addpart(x,y){
+					var particleSystem = new Hilo.ParticleSystem({
+		                x:x,
+		                y:y,
+		                emitNum:1,
+		                emitTime:0.01,
+		                totalTime:0.01,
+		                particle:{
+		                    frame:[
+		                        [0, 0, 50, 50]
+		                    ],
+		                    image:game.asset.queue.get('heart').content,
+		                    life:3,
+		                    alpha:0.8,
+		                    alphaV:-.02,
+		                    vxVar:300,
+		                    vyVar:300,
+		                    axVar:200,
+		                    ayVar:200,
+		                    scale:.5,
+		                    rotationVar:360,
+		                    rotationVVar:4,
+		                    pivotX:.5,
+		                    pivotY:.5
+		                }
+		            });
+		            game.stage.addChild(particleSystem);
+		            partArr.push(particleSystem);
+		            particleSystem.start();
+	            }
+
+	            this.stage.enableDOMEvent(Hilo.event.POINTER_START);
+	    		this.stage.enableDOMEvent(Hilo.event.POINTER_MOVE);
+	    		this.stage.enableDOMEvent(Hilo.event.POINTER_END);
+	            this.stage.onUpdate = this.onUpdate.bind(this);
+	            var timers;
+	            this.stage.on(Hilo.event.POINTER_START, function(e){
+	            	clearTimeout(timers);
+	            	var x = e.touches[0].clientX;
+	            	var y = e.touches[0].clientY;
+	            	addpart(x, y);
+	            })
+	            this.stage.on(Hilo.event.POINTER_MOVE, function(e){
+	            	var x = e.touches[0].clientX;
+	            	var y = e.touches[0].clientY;
+	            	addpart(x, y);
+	            })
+	            this.stage.on(Hilo.event.POINTER_END, function(e){
+	            	clearTimeout(timers);
+	            	timers = setTimeout(function(){
+	            		partArr.forEach(function(e){
+		            		e.removeFromParent();
+		            	})
+		            	partArr = [];
+	            	}, 1000)
+	            })
+	    	},
+	    	addSnow: function(){
+	            // 启动滑动插件
+	            scrollinit();
+	    		// 添加雪花 
+	            game.snow = new Hilo.Container({
+	            	width: _width,
+	                height: _height,
+	                x: 0,
+	                y: 0,
+	                pivotX: 0,
+	                pivotY: 0
+	            }).addTo(game.stage)
+	            for (var i=0; i<50; i++) {
+	            	var random = Math.random();
+	            	var thisX = Math.floor(random*3);
+	            	var thisY = Math.floor(random*4);
+	            	var xRandom = Math.random()*750,
+	            		yRandom = -Math.random()*_height;
+	            	var number = Math.floor(Math.random()*12);
+	            	var snows = new Hilo.Bitmap({
+	            	 	image:this.asset.queue.get('snow').content,
+	            	 	rect: [thisX*100, thisY*100, 100, 100],
+		                pivotX: 0,
+		                pivotY: 0,
+		                x: xRandom,
+		                y: yRandom,
+		                scaleX: random/1.5,
+		                scaleY: random/1.5,
+		                alpha:random*0.6,
+		                rotation:0
+	            	 }).addTo(game.snow)
+	            	snows.xV = random*5-2.5;
+	            	snows.yV = random*5;
+	            	snows.rV = (random-0.5)*2;
+	            }
+	            // console.log(this.stage)
+	    	},
+	    	onUpdate: function(){
+	    		if(game.snow){
+	    			for(var i=0; i<game.snow.children.length; i++){
+		    			var _this = game.snow.children[i];
+		    			_this.x += _this.xV;
+		    			_this.y += _this.yV;
+		    			_this.rotation += _this.rV;
+		    			if(_this.y > _height){
+		    				_this.x = Math.random()*750;
+		    				_this.y = -Math.random()*_height;
+		    				_this.xV = Math.random()*5-2.5;
+		    				_this.rotation = 0;
+		    				_this.rV = Math.random()-0.5;
+		    				_this.alpha = Math.random()*0.6;
+		    			}
+		    		}
+	    		}
+	    	}
+	    }
+	    var  _x = function(e, t, i, n, a) {
+	        return e + (t - e) / (n - i) * (a - i)
+	    }
+	    var scrollinit = function(){
+	    	var scroller = new Scroller(function(e, t, i){
+	            var n = t;
+	            $('.number').text(n)
+	            for(var i = 0; i < stageList.length; i ++){
+	                for(var o = stageList[i], s = o.animations, j = 0; j < s.length; j ++){
+	                    if(game.m[o.id]){
+	                        var h = s[j];
+	                        var d =h.value;
+	                        var f = h.time;
+	                        var  _ = timer[o.delay ? o.delay : "l1"];
+	                        n < f[1] + _ && n > f[0] + _ ? game.m[o.id][h.prope] = d[0] : n < f[f.length - 1] + _ && n > f[f.length - 2] + _ && (game.m[o.id][h.prope] = d[d.length - 1]);
+	                        for (var g = 0; g < d.length - 1; g++)
+	                            n < f[g + 2] + _ && n > f[g + 1] + _ && (game.m[o.id][h.prope] = _x(d[g], d[g + 1], f[g + 1] + _, f[g + 2] + _, n))
+	                    }
+	                }
+	            }
+	            // for(var i = 0 ; i < musicArr.length; i++){
+	            // 	for(var m = musicArr[i], b = m.timer, k = 0; k < b.length; k++){
+	            // 		n < b[1] && n >= b[0] ? (m.dom.paused?m.dom.play():'') : (!m.dom.paused?m.dom.pause():'');
+	            // 	}
+	            // }
+	        },{
+	            zooming: !1,
+	            animating: !0,
+	            bouncing: !1,
+	            animationDuration: 1e3
+	        })
+
+        	scroller.setDimensions(750, _height, 750, 30000);
+
+	        $('.loveCanvas').on('touchstart', function(e){
+	            e.stopPropagation(),
+	            e.preventDefault(),
+	            scroller.doTouchStart(e.touches, e.timeStamp);
+	        }).on('touchmove', function(e){
+	            e.stopPropagation(),
+	            e.preventDefault(),
+	            scroller.doTouchMove(e.touches, e.timeStamp, e.scale);
+	        }).on('touchend', function(e){
+	            scroller.doTouchEnd(e.timeStamp);
+	        });
+	    }
+
+
+	    // 阻止页面滑动
+		;(function(){
+			function isPassive() {
+			    var supportsPassiveOption = false;
+			    try {
+			        addEventListener("test", null, Object.defineProperty({}, 'passive', {
+			            get: function () {
+			                supportsPassiveOption = true;
+			            }
+			        }));
+			    } catch(e) {}
+			    return supportsPassiveOption;
+			}
+			document.addEventListener('touchmove', function (e) { e.preventDefault(); }, isPassive() ? {
+				capture: false,
+				passive: false
+			} : false);
+		})()
+	</script>
+</body>
+</html>
