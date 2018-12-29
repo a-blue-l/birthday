@@ -25,16 +25,16 @@
 		document.addEventListener('DOMContentLoaded', function () {
 	        function audioAutoPlay() {
 	            var video = document.querySelector("#music_01");
-	            // var video1 = document.querySelector("#music_02");
+	            var video1 = document.querySelector("#music_02");
 	            video.play();
-	            // video1.play();
+	            video1.play();
 	            video.pause();
-	            // video1.pause();
+	            video1.pause();
 	            document.addEventListener("WeixinJSBridgeReady", function () {
 	                video.play();
-	                // video1.play();
+	                video1.play();
 	                video.pause();
-	                // video1.pause();
+	                video1.pause();
 	            }, false);
 	        }
 	        audioAutoPlay(); 
@@ -49,17 +49,13 @@
 				<span class="press-press"></span>
 			</div>
 		</div>
-		<div class="start">~随便点击一下屏幕^_^</div>
+		<div class="start">~随便点一下屏幕^_^</div>
 	</div>
 	<div id="music">
-		<audio src="music/music_04.mp3" loop="true" id="music_01"></audio>
-		<!-- <audio src="music/music_05.mp3" loop="true" id="music_02"></audio>
-		<audio src="music/music_03.mp3" loop="true" id="music_03"></audio>
-		<audio src="music/music_02.mp3" loop="true" id="music_04"></audio>
-		<audio src="music/music_01.mp3" loop="true" id="music_05"></audio> -->
+		<audio src="music/music_01.mp3" loop="true" id="music_01"></audio>
+		<audio src="music/music_02.mp3" loop="true" id="music_02"></audio>
 	</div>
 	<div class="loveCanvas"></div>
-	<div class="number"></div>
 	<script src="https://cdn.bootcss.com/jquery/3.3.0/jquery.min.js"></script>
 	<script src="js/hilo-standalone.js"></script>
 	<script src="js/Animate.js"></script>
@@ -81,32 +77,17 @@
 			canvas = document.getElementsByClassName('loveCanvas')[0],
 			music_01 = document.getElementById('music_01'),
 			music_02 = document.getElementById('music_02'),
-			music_03 = document.getElementById('music_03'),
-			music_04 = document.getElementById('music_04'),
-			music_05 = document.getElementById('music_05'),
 			p_cango = false,
         	m_cango = false;
 		var musicArr = [
 			{
 				dom: music_01,
-				timer: [0,5000]
+				timer: [0,9200]
 			},
 			{
 				dom: music_02,
-				timer: [5000, 10000]
-			},
-			{
-				dom: music_03,
-				timer: [10000, 15000]
-			},
-			{
-				dom: music_04,
-				timer: [15000, 20000]
-			},
-			{
-				dom: music_05,
-				timer: [20000, 25000]
-			},
+				timer: [9200, 11000]
+			}
 		];
 		var stageList = [
 			{
@@ -154,6 +135,1492 @@
                		y: 200
 	            },
 	            animations: []
+	        },
+	        // 机械心脏
+	         {
+				id:"myheart",
+				type: "Container",
+	            propes: {
+	                width: 700,
+	                height: 619,
+	                x:50/2,
+	                y:(_height-619)/2,
+	                alpha: 0.7
+	            },
+	            delay: "l0",
+	            animations: []
+			},
+			{
+	            id: "heart1",
+	            type: "Bitmap",
+	            image: "heartjixie",
+	            delay: "l0",
+	            parent:'myheart',
+	            propes: {
+	            	rect: [0, 0, 200, 200],
+	            	x: 169,
+               		y: 113,
+               		alpha: 1,
+               		pivotX: 100,
+	                pivotY: 100
+	            },
+	            animations: [{
+	                prope: "rotation",
+	                time: [0, 0, 10000+_height, 10000+_height],
+	                value: [0, 1000]
+	            }]
+	        },
+	        {
+	            id: "heart2",
+	            type: "Bitmap",
+	            image: "heartjixie",
+	            delay: "l0",
+	            parent:'myheart',
+	            propes: {
+	            	rect: [800, 0, 200, 200],
+	            	x: 34,
+               		y: 133,
+               		alpha: 1,
+               		pivotX: 100,
+	                pivotY: 100,
+	                scaleX:0.5,
+	                scaleY:0.5
+	            },
+	            animations: [{
+	                prope: "rotation",
+	                time: [0, 0, 10000+_height, 10000+_height],
+	                value: [0, -500]
+	            }]
+	        },
+	        {
+	            id: "heart3",
+	            type: "Bitmap",
+	            image: "heartjixie",
+	            delay: "l0",
+	            parent:'myheart',
+	            propes: {
+	            	rect: [0, 0, 200, 200],
+	            	x: 57,
+               		y: 217,
+               		alpha: 1,
+               		pivotX: 100,
+	                pivotY: 100,
+	                scaleX:0.8,
+	                scaleY:0.8
+	            },
+	            animations: [{
+	                prope: "rotation",
+	                time: [0, 0, 10000+_height, 10000+_height],
+	                value: [0, 1000]
+	            }]
+	        },
+	        {
+	            id: "heart4",
+	            type: "Bitmap",
+	            image: "heartjixie",
+	            delay: "l0",
+	            parent:'myheart',
+	            propes: {
+	            	rect: [400, 0, 200, 200],
+	            	x: 470,
+               		y: 104,
+               		alpha: 1,
+               		pivotX: 100,
+	                pivotY: 100,
+	                scaleX:0.85,
+	                scaleY:0.85
+	            },
+	            animations: [{
+	                prope: "rotation",
+	                time: [0, 0, 10000+_height, 10000+_height],
+	                value: [0, -500]
+	            }]
+	        },
+	        {
+	            id: "heart5",
+	            type: "Bitmap",
+	            image: "heartjixie",
+	            delay: "l0",
+	            parent:'myheart',
+	            propes: {
+	            	rect: [800, 0, 200, 200],
+	            	x: 580,
+               		y: 58,
+               		alpha: 1,
+               		pivotX: 100,
+	                pivotY: 100,
+	                scaleX:0.5,
+	                scaleY:0.5
+	            },
+	            animations: [{
+	                prope: "rotation",
+	                time: [0, 0, 10000+_height, 10000+_height],
+	                value: [0, 500]
+	            }]
+	        },
+	        {
+	            id: "heart6",
+	            type: "Bitmap",
+	            image: "heartjixie",
+	            delay: "l0",
+	            parent:'myheart',
+	            propes: {
+	            	rect: [0, 0, 200, 200],
+	            	x: 613,
+               		y: 156,
+               		alpha: 1,
+               		pivotX: 100,
+	                pivotY: 100,
+	                scaleX:1,
+	                scaleY:1
+	            },
+	            animations: [{
+	                prope: "rotation",
+	                time: [0, 0, 10000+_height, 10000+_height],
+	                value: [0, 500]
+	            }]
+	        },
+	        {
+	            id: "heart7",
+	            type: "Bitmap",
+	            image: "heartjixie",
+	            delay: "l0",
+	            parent:'myheart',
+	            propes: {
+	            	rect: [400, 0, 200, 200],
+	            	x: 402,
+               		y: 197,
+               		alpha: 1,
+               		pivotX: 100,
+	                pivotY: 100,
+	                scaleX:0.5,
+	                scaleY:0.5
+	            },
+	            animations: [{
+	                prope: "rotation",
+	                time: [0, 0, 10000+_height, 10000+_height],
+	                value: [0, -500]
+	            }]
+	        },
+	        {
+	            id: "heart8",
+	            type: "Bitmap",
+	            image: "heartjixie",
+	            delay: "l0",
+	            parent:'myheart',
+	            propes: {
+	            	rect: [800, 0, 200, 200],
+	            	x: 408,
+               		y: 275,
+               		alpha: 1,
+               		pivotX: 100,
+	                pivotY: 100,
+	                scaleX:0.5,
+	                scaleY:0.5
+	            },
+	            animations: [{
+	                prope: "rotation",
+	                time: [0, 0, 10000+_height, 10000+_height],
+	                value: [0, -2000]
+	            }]
+	        },
+	        {
+	            id: "heart9",
+	            type: "Bitmap",
+	            image: "heartjixie",
+	            delay: "l0",
+	            parent:'myheart',
+	            propes: {
+	            	rect: [0, 0, 200, 200],
+	            	x: 566,
+               		y: 310,
+               		alpha: 1,
+               		pivotX: 100,
+	                pivotY: 100,
+	                scaleX:1,
+	                scaleY:1
+	            },
+	            animations: [{
+	                prope: "rotation",
+	                time: [0, 0, 10000+_height, 10000+_height],
+	                value: [0, 1000]
+	            }]
+	        },
+	        {
+	            id: "heart10",
+	            type: "Bitmap",
+	            image: "heartjixie",
+	            delay: "l0",
+	            parent:'myheart',
+	            propes: {
+	            	rect: [400, 0, 200, 200],
+	            	x: 449,
+               		y: 359,
+               		alpha: 1,
+               		pivotX: 100,
+	                pivotY: 100,
+	                scaleX:0.6,
+	                scaleY:0.6
+	            },
+	            animations: [{
+	                prope: "rotation",
+	                time: [0, 0, 10000+_height, 10000+_height],
+	                value: [0, -1000]
+	            }]
+	        },
+	        {
+	            id: "heart11",
+	            type: "Bitmap",
+	            image: "heartjixie",
+	            delay: "l0",
+	            parent:'myheart',
+	            propes: {
+	            	rect: [400, 0, 200, 200],
+	            	x: 291,
+               		y: 445,
+               		alpha: 1,
+               		pivotX: 100,
+	                pivotY: 100,
+	                scaleX:0.7,
+	                scaleY:0.7
+	            },
+	            animations: [{
+	                prope: "rotation",
+	                time: [0, 0, 10000+_height, 10000+_height],
+	                value: [0, 600]
+	            }]
+	        },
+	        {
+	            id: "heart12",
+	            type: "Bitmap",
+	            image: "heartjixie",
+	            delay: "l0",
+	            parent:'myheart',
+	            propes: {
+	            	rect: [400, 0, 200, 200],
+	            	x: 419,
+               		y: 465,
+               		alpha: 1,
+               		pivotX: 100,
+	                pivotY: 100,
+	                scaleX:0.5,
+	                scaleY:0.5
+	            },
+	            animations: [{
+	                prope: "rotation",
+	                time: [0, 0, 10000+_height, 10000+_height],
+	                value: [0, -800]
+	            }]
+	        },
+	        {
+	            id: "heart13",
+	            type: "Bitmap",
+	            image: "heartjixie",
+	            delay: "l0",
+	            parent:'myheart',
+	            propes: {
+	            	rect: [0, 0, 200, 200],
+	            	x: 192,
+               		y: 408,
+               		alpha: 1,
+               		pivotX: 100,
+	                pivotY: 100,
+	                scaleX:0.5,
+	                scaleY:0.5
+	            },
+	            animations: [{
+	                prope: "rotation",
+	                time: [0, 0, 10000+_height, 10000+_height],
+	                value: [0, 1000]
+	            }]
+	        },
+	        {
+	            id: "heart14",
+	            type: "Bitmap",
+	            image: "heartjixie",
+	            delay: "l0",
+	            parent:'myheart',
+	            propes: {
+	            	rect: [0, 0, 200, 200],
+	            	x: 192,
+               		y: 408,
+               		alpha: 1,
+               		pivotX: 100,
+	                pivotY: 100,
+	                scaleX:0.5,
+	                scaleY:0.5
+	            },
+	            animations: [{
+	                prope: "rotation",
+	                time: [0, 0, 10000+_height, 10000+_height],
+	                value: [0, -1000]
+	            }]
+	        },
+	        {
+	            id: "heart15",
+	            type: "Bitmap",
+	            image: "heartjixie",
+	            delay: "l0",
+	            parent:'myheart',
+	            propes: {
+	            	rect: [0, 0, 200, 200],
+	            	x: 368,
+               		y: 538,
+               		alpha: 1,
+               		pivotX: 100,
+	                pivotY: 100,
+	                scaleX:0.5,
+	                scaleY:0.5
+	            },
+	            animations: [{
+	                prope: "rotation",
+	                time: [0, 0, 10000+_height, 10000+_height],
+	                value: [0, 900]
+	            }]
+	        },
+	        {
+	            id: "heart16",
+	            type: "Bitmap",
+	            image: "heartjixie",
+	            delay: "l0",
+	            parent:'myheart',
+	            propes: {
+	            	rect: [400, 0, 200, 200],
+	            	x: 304,
+               		y: 540,
+               		alpha: 1,
+               		pivotX: 100,
+	                pivotY: 100,
+	                scaleX:0.3,
+	                scaleY:0.3
+	            },
+	            animations: [{
+	                prope: "rotation",
+	                time: [0, 0, 10000+_height, 10000+_height],
+	                value: [0, -1000]
+	            }]
+	        },
+	        {
+	            id: "heart17",
+	            type: "Bitmap",
+	            image: "heartjixie",
+	            delay: "l0",
+	            parent:'myheart',
+	            propes: {
+	            	rect: [800, 0, 200, 200],
+	            	x: 348,
+               		y: 595,
+               		alpha: 1,
+               		pivotX: 100,
+	                pivotY: 100,
+	                scaleX:0.3,
+	                scaleY:0.3
+	            },
+	            animations: [{
+	                prope: "rotation",
+	                time: [0, 0, 10000+_height, 10000+_height],
+	                value: [0, 1500]
+	            }]
+	        },
+	        {
+	            id: "heart18",
+	            type: "Bitmap",
+	            image: "heartjixie",
+	            delay: "l0",
+	            parent:'myheart',
+	            propes: {
+	            	rect: [200, 0, 200, 200],
+	            	x: 270,
+               		y: 181,
+               		alpha: 1,
+               		pivotX: 100,
+	                pivotY: 100,
+	                scaleX:1,
+	                scaleY:1
+	            },
+	            animations: [{
+	                prope: "rotation",
+	                time: [0, 0, 10000+_height, 10000+_height],
+	                value: [0, -100]
+	            }]
+	        },
+	        {
+	            id: "heart19",
+	            type: "Bitmap",
+	            image: "heartjixie",
+	            delay: "l0",
+	            parent:'myheart',
+	            propes: {
+	            	rect: [600, 0, 200, 200],
+	            	x: 441,
+               		y: 189,
+               		alpha: 1,
+               		pivotX: 100,
+	                pivotY: 100,
+	                scaleX:0.8,
+	                scaleY:0.8
+	            },
+	            animations: [{
+	                prope: "rotation",
+	                time: [0, 0, 10000+_height, 10000+_height],
+	                value: [0, 200]
+	            }]
+	        },
+	        {
+	            id: "heart20",
+	            type: "Bitmap",
+	            image: "heartjixie",
+	            delay: "l0",
+	            parent:'myheart',
+	            propes: {
+	            	rect: [200, 0, 200, 200],
+	            	x: 441,
+               		y: 189,
+               		alpha: 1,
+               		pivotX: 100,
+	                pivotY: 100,
+	                scaleX:0.8,
+	                scaleY:0.8
+	            },
+	            animations: [{
+	                prope: "rotation",
+	                time: [0, 0, 10000+_height, 10000+_height],
+	                value: [0, -300]
+	            }]
+	        },
+	        {
+	            id: "heart21",
+	            type: "Bitmap",
+	            image: "heartjixie",
+	            delay: "l0",
+	            parent:'myheart',
+	            propes: {
+	            	rect: [200, 0, 200, 200],
+	            	x: 202,
+               		y: 271,
+               		alpha: 1,
+               		pivotX: 100,
+	                pivotY: 100,
+	                scaleX:0.5,
+	                scaleY:0.5
+	            },
+	            animations: [{
+	                prope: "rotation",
+	                time: [0, 0, 10000+_height, 10000+_height],
+	                value: [0, 400]
+	            }]
+	        },
+	        {
+	            id: "heart22",
+	            type: "Bitmap",
+	            image: "heartjixie",
+	            delay: "l0",
+	            parent:'myheart',
+	            propes: {
+	            	rect: [600, 0, 200, 200],
+	            	x: 607,
+               		y: 27,
+               		alpha: 1,
+               		pivotX: 100,
+	                pivotY: 100,
+	                scaleX:0.4,
+	                scaleY:0.4
+	            },
+	            animations: [{
+	                prope: "rotation",
+	                time: [0, 0, 10000+_height, 10000+_height],
+	                value: [0, -800]
+	            }]
+	        },
+	        {
+	            id: "heart23",
+	            type: "Bitmap",
+	            image: "heartjixie",
+	            delay: "l0",
+	            parent:'myheart',
+	            propes: {
+	            	rect: [600, 0, 200, 200],
+	            	x: 482,
+               		y: 379,
+               		alpha: 1,
+               		pivotX: 100,
+	                pivotY: 100,
+	                scaleX:0.4,
+	                scaleY:0.4
+	            },
+	            animations: [{
+	                prope: "rotation",
+	                time: [0, 0, 10000+_height, 10000+_height],
+	                value: [0, 1000]
+	            }]
+	        },
+	        {
+	            id: "heart24",
+	            type: "Bitmap",
+	            image: "heartjixie",
+	            delay: "l0",
+	            parent:'myheart',
+	            propes: {
+	            	rect: [600, 0, 200, 200],
+	            	x: 548,
+               		y: 391,
+               		alpha: 1,
+               		pivotX: 100,
+	                pivotY: 100,
+	                scaleX:0.4,
+	                scaleY:0.4
+	            },
+	            animations: [{
+	                prope: "rotation",
+	                time: [0, 0, 10000+_height, 10000+_height],
+	                value: [0, -1000]
+	            }]
+	        },
+	        {
+	            id: "heart25",
+	            type: "Bitmap",
+	            image: "heartjixie",
+	            delay: "l0",
+	            parent:'myheart',
+	            propes: {
+	            	rect: [400, 0, 200, 200],
+	            	x: 459,
+               		y: 301,
+               		alpha: 1,
+               		pivotX: 100,
+	                pivotY: 100,
+	                scaleX:0.6,
+	                scaleY:0.6
+	            },
+	            animations: [{
+	                prope: "rotation",
+	                time: [0, 0, 10000+_height, 10000+_height],
+	                value: [0, -2000]
+	            }]
+	        },
+	        {
+	            id: "heart26",
+	            type: "Bitmap",
+	            image: "heartjixie",
+	            delay: "l0",
+	            parent:'myheart',
+	            propes: {
+	            	rect: [0, 0, 200, 200],
+	            	x: 459,
+               		y: 301,
+               		alpha: 1,
+               		pivotX: 100,
+	                pivotY: 100,
+	                scaleX:0.6,
+	                scaleY:0.6
+	            },
+	            animations: [{
+	                prope: "rotation",
+	                time: [0, 0, 10000+_height, 10000+_height],
+	                value: [0, -800]
+	            }]
+	        },
+	        {
+	            id: "heart27",
+	            type: "Bitmap",
+	            image: "heartjixie",
+	            delay: "l0",
+	            parent:'myheart',
+	            propes: {
+	            	rect: [600, 0, 200, 200],
+	            	x: 361,
+               		y: 376,
+               		alpha: 1,
+               		pivotX: 100,
+	                pivotY: 100,
+	                scaleX:1,
+	                scaleY:1
+	            },
+	            animations: [{
+	                prope: "rotation",
+	                time: [0, 0, 10000+_height, 10000+_height],
+	                value: [0, -1000]
+	            }]
+	        },
+	        {
+	            id: "heart28",
+	            type: "Bitmap",
+	            image: "heartjixie",
+	            delay: "l0",
+	            parent:'myheart',
+	            propes: {
+	            	rect: [800, 0, 200, 200],
+	            	x: 312,
+               		y: 404,
+               		alpha: 1,
+               		pivotX: 100,
+	                pivotY: 100,
+	                scaleX:0.4,
+	                scaleY:0.4
+	            },
+	            animations: [{
+	                prope: "rotation",
+	                time: [0, 0, 10000+_height, 10000+_height],
+	                value: [0, -1000]
+	            }]
+	        },
+	        {
+	            id: "heart29",
+	            type: "Bitmap",
+	            image: "heartjixie",
+	            delay: "l0",
+	            parent:'myheart',
+	            propes: {
+	            	rect: [400, 0, 200, 200],
+	            	x: 150,
+               		y: 370,
+               		alpha: 1,
+               		pivotX: 100,
+	                pivotY: 100,
+	                scaleX:0.5,
+	                scaleY:0.5
+	            },
+	            animations: [{
+	                prope: "rotation",
+	                time: [0, 0, 10000+_height, 10000+_height],
+	                value: [0, -1000]
+	            }]
+	        },
+	        {
+	            id: "heart30",
+	            type: "Bitmap",
+	            image: "heartjixie",
+	            delay: "l0",
+	            parent:'myheart',
+	            propes: {
+	            	rect: [400, 0, 200, 200],
+	            	x: 131,
+               		y: 335,
+               		alpha: 1,
+               		pivotX: 100,
+	                pivotY: 100,
+	                scaleX:0.6,
+	                scaleY:0.6
+	            },
+	            animations: [{
+	                prope: "rotation",
+	                time: [0, 0, 10000+_height, 10000+_height],
+	                value: [0, -1000]
+	            }]
+	        },
+	        {
+	            id: "heart31",
+	            type: "Bitmap",
+	            image: "heartjixie",
+	            delay: "l0",
+	            parent:'myheart',
+	            propes: {
+	            	rect: [400, 0, 200, 200],
+	            	x: 418,
+               		y: 467,
+               		alpha: 1,
+               		pivotX: 100,
+	                pivotY: 100,
+	                scaleX:0.6,
+	                scaleY:0.6
+	            },
+	            animations: [{
+	                prope: "rotation",
+	                time: [0, 0, 10000+_height, 10000+_height],
+	                value: [0, -1000]
+	            }]
+	        },
+	        {
+	            id: "heart32",
+	            type: "Bitmap",
+	            image: "heartjixie",
+	            delay: "l0",
+	            parent:'myheart',
+	            propes: {
+	            	rect: [400, 0, 200, 200],
+	            	x: 482,
+               		y: 438,
+               		alpha: 1,
+               		pivotX: 100,
+	                pivotY: 100,
+	                scaleX:0.5,
+	                scaleY:0.5
+	            },
+	            animations: [{
+	                prope: "rotation",
+	                time: [0, 0, 10000+_height, 10000+_height],
+	                value: [0, -1000]
+	            }]
+	        },
+	        {
+	            id: "heart33",
+	            type: "Bitmap",
+	            image: "heartjixie",
+	            delay: "l0",
+	            parent:'myheart',
+	            propes: {
+	            	rect: [200, 0, 200, 200],
+	            	x: 289,
+               		y: 243,
+               		alpha: 1,
+               		pivotX: 100,
+	                pivotY: 100,
+	                scaleX:0.4,
+	                scaleY:0.4
+	            },
+	            animations: [{
+	                prope: "rotation",
+	                time: [0, 0, 10000+_height, 10000+_height],
+	                value: [0, -1000]
+	            }]
+	        },
+	        {
+	            id: "heart34",
+	            type: "Bitmap",
+	            image: "heartjixie",
+	            delay: "l0",
+	            parent:'myheart',
+	            propes: {
+	            	rect: [0, 0, 200, 200],
+	            	x: 139,
+               		y: 205,
+               		alpha: 1,
+               		pivotX: 100,
+	                pivotY: 100,
+	                scaleX:0.4,
+	                scaleY:0.4
+	            },
+	            animations: [{
+	                prope: "rotation",
+	                time: [0, 0, 10000+_height, 10000+_height],
+	                value: [0, -1000]
+	            }]
+	        },
+	        {
+	            id: "heart35",
+	            type: "Bitmap",
+	            image: "heartjixie",
+	            delay: "l0",
+	            parent:'myheart',
+	            propes: {
+	            	rect: [200, 0, 200, 200],
+	            	x: 82,
+               		y: 237,
+               		alpha: 1,
+               		pivotX: 100,
+	                pivotY: 100,
+	                scaleX:0.4,
+	                scaleY:0.4
+	            },
+	            animations: [{
+	                prope: "rotation",
+	                time: [0, 0, 10000+_height, 10000+_height],
+	                value: [0, -1000]
+	            }]
+	        },
+	        {
+	            id: "heart36",
+	            type: "Bitmap",
+	            image: "heartjixie",
+	            delay: "l0",
+	            parent:'myheart',
+	            propes: {
+	            	rect: [600, 0, 200, 200],
+	            	x: 117,
+               		y: 287,
+               		alpha: 1,
+               		pivotX: 100,
+	                pivotY: 100,
+	                scaleX:0.6,
+	                scaleY:0.6
+	            },
+	            animations: [{
+	                prope: "rotation",
+	                time: [0, 0, 10000+_height, 10000+_height],
+	                value: [0, -1000]
+	            }]
+	        },
+	        {
+	            id: "heart37",
+	            type: "Bitmap",
+	            image: "heartjixie",
+	            delay: "l0",
+	            parent:'myheart',
+	            propes: {
+	            	rect: [600, 0, 200, 200],
+	            	x: 483,
+               		y: 381,
+               		alpha: 1,
+               		pivotX: 100,
+	                pivotY: 100,
+	                scaleX:0.5,
+	                scaleY:0.5
+	            },
+	            animations: [{
+	                prope: "rotation",
+	                time: [0, 0, 10000+_height, 10000+_height],
+	                value: [0, -1000]
+	            }]
+	        },
+	        {
+	            id: "heart38",
+	            type: "Bitmap",
+	            image: "heartjixie",
+	            delay: "l0",
+	            parent:'myheart',
+	            propes: {
+	            	rect: [400, 0, 200, 200],
+	            	x: 482,
+               		y: 437,
+               		alpha: 1,
+               		pivotX: 100,
+	                pivotY: 100,
+	                scaleX:0.4,
+	                scaleY:0.4
+	            },
+	            animations: [{
+	                prope: "rotation",
+	                time: [0, 0, 10000+_height, 10000+_height],
+	                value: [0, -1000]
+	            }]
+	        },
+	        {
+	            id: "heart39",
+	            type: "Bitmap",
+	            image: "heartjixie",
+	            delay: "l0",
+	            parent:'myheart',
+	            propes: {
+	            	rect: [400, 0, 200, 200],
+	            	x: 517,
+               		y: 410,
+               		alpha: 1,
+               		pivotX: 100,
+	                pivotY: 100,
+	                scaleX:0.5,
+	                scaleY:0.5
+	            },
+	            animations: [{
+	                prope: "rotation",
+	                time: [0, 0, 10000+_height, 10000+_height],
+	                value: [0, -1000]
+	            }]
+	        },
+	        {
+	            id: "heart40",
+	            type: "Bitmap",
+	            image: "heartjixie",
+	            delay: "l0",
+	            parent:'myheart',
+	            propes: {
+	            	rect: [200, 0, 200, 200],
+	            	x: 240,
+               		y: 401,
+               		alpha: 1,
+               		pivotX: 100,
+	                pivotY: 100,
+	                scaleX:0.3,
+	                scaleY:0.3
+	            },
+	            animations: [{
+	                prope: "rotation",
+	                time: [0, 0, 10000+_height, 10000+_height],
+	                value: [0, -1000]
+	            }]
+	        },
+	        {
+	            id: "heart41",
+	            type: "Bitmap",
+	            image: "heartjixie",
+	            delay: "l0",
+	            parent:'myheart',
+	            propes: {
+	            	rect: [400, 0, 200, 200],
+	            	x: 60,
+               		y: 83,
+               		alpha: 1,
+               		pivotX: 100,
+	                pivotY: 100,
+	                scaleX:0.3,
+	                scaleY:0.3
+	            },
+	            animations: [{
+	                prope: "rotation",
+	                time: [0, 0, 10000+_height, 10000+_height],
+	                value: [0, -1000]
+	            }]
+	        },
+	        {
+	            id: "heart42",
+	            type: "Bitmap",
+	            image: "heartjixie",
+	            delay: "l0",
+	            parent:'myheart',
+	            propes: {
+	            	rect: [0, 0, 200, 200],
+	            	x: 220,
+               		y: 323,
+               		alpha: 1,
+               		pivotX: 100,
+	                pivotY: 100,
+	                scaleX:1,
+	                scaleY:1
+	            },
+	            animations: [{
+	                prope: "rotation",
+	                time: [0, 0, 10000+_height, 10000+_height],
+	                value: [0, -1000]
+	            }]
+	        },
+	        {
+	            id: "heart42",
+	            type: "Bitmap",
+	            image: "heartjixie",
+	            delay: "l0",
+	            parent:'myheart',
+	            propes: {
+	            	rect: [200, 0, 200, 200],
+	            	x: 555,
+               		y: 232,
+               		alpha: 1,
+               		pivotX: 100,
+	                pivotY: 100,
+	                scaleX:0.6,
+	                scaleY:0.6
+	            },
+	            animations: [{
+	                prope: "rotation",
+	                time: [0, 0, 10000+_height, 10000+_height],
+	                value: [0, -1000]
+	            }]
+	        },
+	        {
+	            id: "heart43",
+	            type: "Bitmap",
+	            image: "heartjixie",
+	            delay: "l0",
+	            parent:'myheart',
+	            propes: {
+	            	rect: [600, 0, 200, 200],
+	            	x: 603,
+               		y: 279,
+               		alpha: 1,
+               		pivotX: 100,
+	                pivotY: 100,
+	                scaleX:0.5,
+	                scaleY:0.5
+	            },
+	            animations: [{
+	                prope: "rotation",
+	                time: [0, 0, 10000+_height, 10000+_height],
+	                value: [0, -1000]
+	            }]
+	        },
+	        {
+	            id: "heart44",
+	            type: "Bitmap",
+	            image: "heartjixie",
+	            delay: "l0",
+	            parent:'myheart',
+	            propes: {
+	            	rect: [600, 0, 200, 200],
+	            	x: 538,
+               		y: 100,
+               		alpha: 1,
+               		pivotX: 100,
+	                pivotY: 100,
+	                scaleX:0.5,
+	                scaleY:0.5
+	            },
+	            animations: [{
+	                prope: "rotation",
+	                time: [0, 0, 10000+_height, 10000+_height],
+	                value: [0, -1000]
+	            }]
+	        },
+	        {
+	            id: "heart45",
+	            type: "Bitmap",
+	            image: "heartjixie",
+	            delay: "l0",
+	            parent:'myheart',
+	            propes: {
+	            	rect: [400, 0, 200, 200],
+	            	x: 418,
+               		y: 467,
+               		alpha: 1,
+               		pivotX: 100,
+	                pivotY: 100,
+	                scaleX:0.1,
+	                scaleY:0.1
+	            },
+	            animations: [{
+	                prope: "rotation",
+	                time: [0, 0, 10000+_height, 10000+_height],
+	                value: [0, -1000]
+	            }]
+	        },
+	        {
+	            id: "heart46",
+	            type: "Bitmap",
+	            image: "heartjixie",
+	            delay: "l0",
+	            parent:'myheart',
+	            propes: {
+	            	rect: [400, 0, 200, 200],
+	            	x: 418,
+               		y: 467,
+               		alpha: 1,
+               		pivotX: 100,
+	                pivotY: 100,
+	                scaleX:0.1,
+	                scaleY:0.1
+	            },
+	            animations: [{
+	                prope: "rotation",
+	                time: [0, 0, 10000+_height, 10000+_height],
+	                value: [0, -1000]
+	            }]
+	        },
+	        {
+	            id: "heart47",
+	            type: "Bitmap",
+	            image: "heartjixie",
+	            delay: "l0",
+	            parent:'myheart',
+	            propes: {
+	            	rect: [400, 0, 200, 200],
+	            	x: 418,
+               		y: 467,
+               		alpha: 1,
+               		pivotX: 100,
+	                pivotY: 100,
+	                scaleX:0.2,
+	                scaleY:0.2
+	            },
+	            animations: [{
+	                prope: "rotation",
+	                time: [0, 0, 10000+_height, 10000+_height],
+	                value: [0, -1000]
+	            }]
+	        },
+	        {
+	            id: "heart48",
+	            type: "Bitmap",
+	            image: "heartjixie",
+	            delay: "l0",
+	            parent:'myheart',
+	            propes: {
+	            	rect: [400, 0, 200, 200],
+	            	x: 418,
+               		y: 467,
+               		alpha: 1,
+               		pivotX: 100,
+	                pivotY: 100,
+	                scaleX:0.1,
+	                scaleY:0.1
+	            },
+	            animations: [{
+	                prope: "rotation",
+	                time: [0, 0, 10000+_height, 10000+_height],
+	                value: [0, -1000]
+	            }]
+	        },
+	        {
+	            id: "heart49",
+	            type: "Bitmap",
+	            image: "heartjixie",
+	            delay: "l0",
+	            parent:'myheart',
+	            propes: {
+	            	rect: [400, 0, 200, 200],
+	            	x: 418,
+               		y: 467,
+               		alpha: 1,
+               		pivotX: 100,
+	                pivotY: 100,
+	                scaleX:0.1,
+	                scaleY:0.1
+	            },
+	            animations: [{
+	                prope: "rotation",
+	                time: [0, 0, 10000+_height, 10000+_height],
+	                value: [0, -1000]
+	            }]
+	        },
+	        {
+	            id: "heart50",
+	            type: "Bitmap",
+	            image: "heartjixie",
+	            delay: "l0",
+	            parent:'myheart',
+	            propes: {
+	            	rect: [400, 0, 200, 200],
+	            	x: 418,
+               		y: 467,
+               		alpha: 1,
+               		pivotX: 100,
+	                pivotY: 100,
+	                scaleX:0.1,
+	                scaleY:0.1
+	            },
+	            animations: [{
+	                prope: "rotation",
+	                time: [0, 0, 10000+_height, 10000+_height],
+	                value: [0, -1000]
+	            }]
+	        },
+	        {
+	            id: "heart51",
+	            type: "Bitmap",
+	            image: "heartjixie",
+	            delay: "l0",
+	            parent:'myheart',
+	            propes: {
+	            	rect: [400, 0, 200, 200],
+	            	x: 418,
+               		y: 467,
+               		alpha: 1,
+               		pivotX: 100,
+	                pivotY: 100,
+	                scaleX:0.2,
+	                scaleY:0.2
+	            },
+	            animations: [{
+	                prope: "rotation",
+	                time: [0, 0, 10000+_height, 10000+_height],
+	                value: [0, -1000]
+	            }]
+	        },
+	        {
+	            id: "heart52",
+	            type: "Bitmap",
+	            image: "heartjixie",
+	            delay: "l0",
+	            parent:'myheart',
+	            propes: {
+	            	rect: [400, 0, 200, 200],
+	            	x: 418,
+               		y: 467,
+               		alpha: 1,
+               		pivotX: 100,
+	                pivotY: 100,
+	                scaleX:0.3,
+	                scaleY:0.3
+	            },
+	            animations: [{
+	                prope: "rotation",
+	                time: [0, 0, 10000+_height, 10000+_height],
+	                value: [0, -1000]
+	            }]
+	        },
+	        {
+	            id: "heart53",
+	            type: "Bitmap",
+	            image: "heartjixie",
+	            delay: "l0",
+	            parent:'myheart',
+	            propes: {
+	            	rect: [400, 0, 200, 200],
+	            	x: 482,
+               		y: 438,
+               		alpha: 1,
+               		pivotX: 100,
+	                pivotY: 100,
+	                scaleX:0.25,
+	                scaleY:0.25
+	            },
+	            animations: [{
+	                prope: "rotation",
+	                time: [0, 0, 10000+_height, 10000+_height],
+	                value: [0, -1000]
+	            }]
+	        },
+	        {
+	            id: "heart54",
+	            type: "Bitmap",
+	            image: "heartjixie",
+	            delay: "l0",
+	            parent:'myheart',
+	            propes: {
+	            	rect: [200, 0, 200, 200],
+	            	x: 289,
+               		y: 243,
+               		alpha: 1,
+               		pivotX: 100,
+	                pivotY: 100,
+	                scaleX:0.2,
+	                scaleY:0.2
+	            },
+	            animations: [{
+	                prope: "rotation",
+	                time: [0, 0, 10000+_height, 10000+_height],
+	                value: [0, -1000]
+	            }]
+	        },
+	        {
+	            id: "heart56",
+	            type: "Bitmap",
+	            image: "heartjixie",
+	            delay: "l0",
+	            parent:'myheart',
+	            propes: {
+	            	rect: [0, 0, 200, 200],
+	            	x: 139,
+               		y: 205,
+               		alpha: 1,
+               		pivotX: 100,
+	                pivotY: 100,
+	                scaleX:0.2,
+	                scaleY:0.2
+	            },
+	            animations: [{
+	                prope: "rotation",
+	                time: [0, 0, 10000+_height, 10000+_height],
+	                value: [0, -1000]
+	            }]
+	        },
+	        {
+	            id: "heart57",
+	            type: "Bitmap",
+	            image: "heartjixie",
+	            delay: "l0",
+	            parent:'myheart',
+	            propes: {
+	            	rect: [200, 0, 200, 200],
+	            	x: 82,
+               		y: 237,
+               		alpha: 1,
+               		pivotX: 100,
+	                pivotY: 100,
+	                scaleX:0.2,
+	                scaleY:0.2
+	            },
+	            animations: [{
+	                prope: "rotation",
+	                time: [0, 0, 10000+_height, 10000+_height],
+	                value: [0, -1000]
+	            }]
+	        },
+	        {
+	            id: "heart58",
+	            type: "Bitmap",
+	            image: "heartjixie",
+	            delay: "l0",
+	            parent:'myheart',
+	            propes: {
+	            	rect: [600, 0, 200, 200],
+	            	x: 117,
+               		y: 287,
+               		alpha: 1,
+               		pivotX: 100,
+	                pivotY: 100,
+	                scaleX:0.3,
+	                scaleY:0.3
+	            },
+	            animations: [{
+	                prope: "rotation",
+	                time: [0, 0, 10000+_height, 10000+_height],
+	                value: [0, -1000]
+	            }]
+	        },
+	        {
+	            id: "heart59",
+	            type: "Bitmap",
+	            image: "heartjixie",
+	            delay: "l0",
+	            parent:'myheart',
+	            propes: {
+	            	rect: [600, 0, 200, 200],
+	            	x: 483,
+               		y: 381,
+               		alpha: 1,
+               		pivotX: 100,
+	                pivotY: 100,
+	                scaleX:0.25,
+	                scaleY:0.25
+	            },
+	            animations: [{
+	                prope: "rotation",
+	                time: [0, 0, 10000+_height, 10000+_height],
+	                value: [0, -1000]
+	            }]
+	        },
+	        {
+	            id: "heart60",
+	            type: "Bitmap",
+	            image: "heartjixie",
+	            delay: "l0",
+	            parent:'myheart',
+	            propes: {
+	            	rect: [400, 0, 200, 200],
+	            	x: 482,
+               		y: 437,
+               		alpha: 1,
+               		pivotX: 100,
+	                pivotY: 100,
+	                scaleX:0.2,
+	                scaleY:0.2
+	            },
+	            animations: [{
+	                prope: "rotation",
+	                time: [0, 0, 10000+_height, 10000+_height],
+	                value: [0, -1000]
+	            }]
+	        },
+	        {
+	            id: "heart61",
+	            type: "Bitmap",
+	            image: "heartjixie",
+	            delay: "l0",
+	            parent:'myheart',
+	            propes: {
+	            	rect: [400, 0, 200, 200],
+	            	x: 517,
+               		y: 410,
+               		alpha: 1,
+               		pivotX: 100,
+	                pivotY: 100,
+	                scaleX:0.25,
+	                scaleY:0.25
+	            },
+	            animations: [{
+	                prope: "rotation",
+	                time: [0, 0, 10000+_height, 10000+_height],
+	                value: [0, -1000]
+	            }]
+	        },
+	        {
+	            id: "heart62",
+	            type: "Bitmap",
+	            image: "heartjixie",
+	            delay: "l0",
+	            parent:'myheart',
+	            propes: {
+	            	rect: [200, 0, 200, 200],
+	            	x: 240,
+               		y: 401,
+               		alpha: 1,
+               		pivotX: 100,
+	                pivotY: 100,
+	                scaleX:0.1,
+	                scaleY:0.1
+	            },
+	            animations: [{
+	                prope: "rotation",
+	                time: [0, 0, 10000+_height, 10000+_height],
+	                value: [0, -1000]
+	            }]
+	        },
+	        {
+	            id: "heart63",
+	            type: "Bitmap",
+	            image: "heartjixie",
+	            delay: "l0",
+	            parent:'myheart',
+	            propes: {
+	            	rect: [400, 0, 200, 200],
+	            	x: 60,
+               		y: 83,
+               		alpha: 1,
+               		pivotX: 100,
+	                pivotY: 100,
+	                scaleX:0.1,
+	                scaleY:0.1
+	            },
+	            animations: [{
+	                prope: "rotation",
+	                time: [0, 0, 10000+_height, 10000+_height],
+	                value: [0, -1000]
+	            }]
+	        },
+	        {
+	            id: "heart64",
+	            type: "Bitmap",
+	            image: "heartjixie",
+	            delay: "l0",
+	            parent:'myheart',
+	            propes: {
+	            	rect: [0, 0, 200, 200],
+	            	x: 220,
+               		y: 323,
+               		alpha: 1,
+               		pivotX: 100,
+	                pivotY: 100,
+	                scaleX:0.5,
+	                scaleY:0.5
+	            },
+	            animations: [{
+	                prope: "rotation",
+	                time: [0, 0, 10000+_height, 10000+_height],
+	                value: [0, -1000]
+	            }]
+	        },
+	        {
+	            id: "heart65",
+	            type: "Bitmap",
+	            image: "heartjixie",
+	            delay: "l0",
+	            parent:'myheart',
+	            propes: {
+	            	rect: [200, 0, 200, 200],
+	            	x: 555,
+               		y: 232,
+               		alpha: 1,
+               		pivotX: 100,
+	                pivotY: 100,
+	                scaleX:0.3,
+	                scaleY:0.3
+	            },
+	            animations: [{
+	                prope: "rotation",
+	                time: [0, 0, 10000+_height, 10000+_height],
+	                value: [0, -1000]
+	            }]
+	        },
+	        {
+	            id: "heart66",
+	            type: "Bitmap",
+	            image: "heartjixie",
+	            delay: "l0",
+	            parent:'myheart',
+	            propes: {
+	            	rect: [600, 0, 200, 200],
+	            	x: 603,
+               		y: 279,
+               		alpha: 1,
+               		pivotX: 100,
+	                pivotY: 100,
+	                scaleX:0.2,
+	                scaleY:0.2
+	            },
+	            animations: [{
+	                prope: "rotation",
+	                time: [0, 0, 10000+_height, 10000+_height],
+	                value: [0, -1000]
+	            }]
+	        },
+	        {
+	            id: "heart67",
+	            type: "Bitmap",
+	            image: "heartjixie",
+	            delay: "l0",
+	            parent:'myheart',
+	            propes: {
+	            	rect: [600, 0, 200, 200],
+	            	x: 538,
+               		y: 100,
+               		alpha: 1,
+               		pivotX: 100,
+	                pivotY: 100,
+	                scaleX:0.2,
+	                scaleY:0.2
+	            },
+	            animations: [{
+	                prope: "rotation",
+	                time: [0, 0, 10000+_height, 10000+_height],
+	                value: [0, -1000]
+	            }]
 	        },
 	        {
 	            id: "img_01",
@@ -263,7 +1730,7 @@
 	            animations: [{
 	                prope: "alpha",
 	                time: [0, 9000, 10000, 2e5],
-	                value: [0, 0.4]
+	                value: [0, 1]
 	            }]
 	        },
 	        {
@@ -289,7 +1756,7 @@
 	            image: "birthText",
 	            delay: "l0",
 	            propes: {
-	            	rect: [0, 43, 165, 81],
+	            	rect: [0, 43, 165, 41],
 	            	x: (750-165)/2,
                		y: (_height-43)/2,
                		alpha: 0
@@ -405,27 +1872,40 @@
 	                value: [(_height-39)/2, (_height-39)/2-200]
 	            }]
 	        },
-	        // {
-	        //     id: "text_08",
-	        //     type: "Bitmap",
-	        //     image: "birthText",
-	        //     delay: "l0",
-	        //     propes: {
-	        //     	rect: [626, 0, 125, 43],
-	        //     	x: (750-125)/2,
-         //       		y: (_height-43)/2,
-         //       		alpha: 0
-	        //     },
-	        //     animations: [{
-	        //         prope: "alpha",
-	        //         time: [0, 8000, 8500, 9000, 2e5],
-	        //         value: [0, 1, 0]
-	        //     },{
-	        //         prope: "y",
-	        //         time: [0, 8000, 9000, 2e5],
-	        //         value: [(_height-43)/2, (_height-43)/2-200]
-	        //     }]
-	        // }
+	        {
+	            id: "text_08",
+	            type: "Bitmap",
+	            image: "birthText",
+	            delay: "l0",
+	            propes: {
+	            	rect: [628, 0, 120, 43],
+	            	x: (750-120)/2,
+               		y: (_height-43)/2-400,
+               		alpha: 0
+	            },
+	            animations: [{
+	                prope: "alpha",
+	                time: [0, 8000, 10000, 2e5],
+	                value: [0, 1]
+	            }]
+	        },
+	        {
+	            id: "text_09",
+	            type: "Bitmap",
+	            image: "birthText",
+	            delay: "l0",
+	            propes: {
+	            	rect: [0, 82, 288, 40],
+	            	x: (750-288)/2,
+               		y: (_height-40)/2-350,
+               		alpha: 0
+	            },
+	            animations: [{
+	                prope: "alpha",
+	                time: [0, 8500, 10000, 2e5],
+	                value: [0, 1]
+	            }]
+	        },
 		];
 		var timer = {
 			l0: 0,
@@ -453,6 +1933,7 @@
 	           		{id:'img_04', src: 'images/img_04.jpg'},
 	           		{id:'birthText', src: 'images/birthText.png'},
 	           		{id:'cake', src: 'images/cake.png'},
+	           		{id:'heartjixie', src: 'images/heartjixie.png'},
 	            ];
 	            this.queue = new Hilo.LoadQueue();
 	            this.queue.add(resource);
@@ -485,6 +1966,8 @@
 	        ticker: null,
 	        snow: null,
 	        lines: null,
+	        cake: null,
+	        iscake: false,
 	        m:{},
 	    	init: function(){
 	 			this.asset = new Asset();
@@ -603,7 +2086,16 @@
 	                y: 0,
 	                pivotX: 0,
 	                pivotY: 0
-	            }).addTo(game.stage)
+	            }).addTo(game.stage);
+	            game.cake = new Hilo.Container({
+	            	width: _width,
+	                height: _height,
+	                x: 0,
+	                y: 0,
+	                pivotX: 0,
+	                pivotY: 0,
+	                alpha: 0
+	            }).addTo(game.stage);
 	            for (var i=0; i<50; i++) {
 	            	var random = Math.random();
 	            	var thisX = Math.floor(random*3);
@@ -627,6 +2119,27 @@
 	            	snows.yV = random*5;
 	            	snows.rV = (random-0.5)*2;
 	            }
+	            for (var i=0; i<50; i++) {
+	            	var random = Math.random();
+	            	var thisX = Math.floor(random*3);
+	            	var thisY = Math.floor(random*4);
+	            	var xRandom = Math.random()*750,
+	            		yRandom = -Math.random()*_height-50;
+	            	var number = Math.floor(Math.random()*12);
+	            	var cakes = new Hilo.Bitmap({
+	            	 	image:this.asset.queue.get('cake').content,
+	            	 	rect: [0, 0, 500, 506],
+		                pivotX: 0,
+		                pivotY: 0,
+		                width: 50,
+		                height:50.6,
+		                x: xRandom,
+		                y: yRandom,
+		                rotation:0
+	            	 }).addTo(game.cake)
+	            	 cakes.yV = random*10;
+	            	 cakes.rV = (random-0.5)*2;
+	            }
 	            // console.log(this.stage)
 	    	},
 	    	onUpdate: function(){
@@ -646,6 +2159,20 @@
 		    			}
 		    		}
 	    		}
+	    		// 蛋糕掉落
+	    		if(game.cake){
+	    			for(var i=0; i<game.cake.children.length; i++){
+		    			var _this = game.cake.children[i];
+		    			if(_this.y > _height){
+		    				_this.x = Math.random()*750;
+		    				_this.rotation = 0;
+		    				_this.y = -Math.random()*_height;
+		    			} else{
+		    				_this.y += _this.yV;
+		    				_this.rotation += _this.rV;
+		    			}
+		    		}
+	    		}
 	    	}
 	    }
 	    var  _x = function(e, t, i, n, a) {
@@ -654,7 +2181,31 @@
 	    var scrollinit = function(){
 	    	var scroller = new Scroller(function(e, t, i){
 	            var n = t;
-	            $('.number').text(n)
+	            n>9000?game.iscake=true:game.iscake=false;
+	            if(n<9000 && game.cake){
+	            	Hilo.Tween.to(game.cake, {
+		                alpha: 0
+		            }, {
+		                duration: 300
+		            })
+		            Hilo.Tween.to(game.snow, {
+		                alpha: 1
+		            }, {
+		                duration: 300
+		            })
+	            } else if(game.cake) {
+	            	Hilo.Tween.to(game.cake, {
+		                alpha: 1
+		            }, {
+		                duration: 300
+		            })
+		             Hilo.Tween.to(game.snow, {
+		                alpha: 0
+		            }, {
+		                duration: 300
+		            })
+	            }
+	            // $('.number').text(n)
 	            for(var i = 0; i < stageList.length; i ++){
 	                for(var o = stageList[i], s = o.animations, j = 0; j < s.length; j ++){
 	                    if(game.m[o.id]){
@@ -668,11 +2219,11 @@
 	                    }
 	                }
 	            }
-	            // for(var i = 0 ; i < musicArr.length; i++){
-	            // 	for(var m = musicArr[i], b = m.timer, k = 0; k < b.length; k++){
-	            // 		n < b[1] && n >= b[0] ? (m.dom.paused?m.dom.play():'') : (!m.dom.paused?m.dom.pause():'');
-	            // 	}
-	            // }
+	            for(var i = 0 ; i < musicArr.length; i++){
+	            	for(var m = musicArr[i], b = m.timer, k = 0; k < b.length; k++){
+	            		n < b[1] && n >= b[0] ? (m.dom.paused?m.dom.play():'') : (!m.dom.paused?m.dom.pause():'');
+	            	}
+	            }
 	        },{
 	            zooming: !1,
 	            animating: !0,
@@ -696,6 +2247,7 @@
 	    }
 
 	    music_01.load();
+	    music_02.load();
 	    music_01.addEventListener('canplaythrough', function(){
 	        m_cango = true;
 	        if(p_cango){
